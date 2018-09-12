@@ -10,9 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2018_09_12_091721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "drawings", force: :cascade do |t|
+    t.string "type"
+    t.datetime "drawing_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "picks", force: :cascade do |t|
+    t.integer "ticket_id"
+    t.integer "ball_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer "drawing_id"
+    t.integer "user_id"
+    t.integer "correct_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "winning_picks", force: :cascade do |t|
+    t.integer "drawing_id"
+    t.integer "ball_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

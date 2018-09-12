@@ -1,0 +1,2 @@
+class WinningPick < ApplicationRecord
+end
