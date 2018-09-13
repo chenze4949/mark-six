@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  has_many: tickets, foreign_key: "user_id", class_name: "Ticket"
+  has_many :tickets, class_name: "Ticket", foreign_key: "user_id"
 end
