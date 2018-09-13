@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "drawings#index"
 
   devise_for :users
-  
-  resources :drawings
+
+  resources :drawings do
+    resources :tickets
+  end
 end

@@ -4,8 +4,45 @@
 </p>
 
 <p>
-<strong>Type:</strong>
-<%= @drawing.drawing_type %>
+<strong>Created At:</strong>
+<%= @drawing.created_at %>
 </p>
+
+<h2>Tickets</h2>
+<% @drawing.tickets.each do |ticket| %>
+  <p>
+    <strong>Id:</strong>
+    <%= ticket.id %>
+  </p>
+
+  <p>
+    <strong>Drawing:</strong>
+    <%= ticket.drawing_id %>
+  </p>
+ 
+  <p>
+    <strong>User:</strong>
+    <%= ticket.user_id %>
+  </p>
+<% end %>
+ 
+<h2>Buy a ticket:</h2>
+<%= form_with(model: [ @drawing, @drawing.tickets.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :picks %><br>
+    <p>Please pick 3 numbers!</p>
+    <ul>
+      <% 1.upto(10) do |i| -%>
+          <li>
+            <%= check_box_tag "picks[]", i %>
+            <%= i -%>
+          </li>
+      <% end %>
+    </ul>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
 
 <%= link_to 'Back', drawings_path %>
