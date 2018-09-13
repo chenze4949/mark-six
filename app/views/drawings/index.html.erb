@@ -6,7 +6,7 @@
       <th>Title</th>
       <th>Type</th>
       <th>Created At</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +16,7 @@
       <td><%= drawing.title %></td>
       <td><%= drawing.drawing_type %></td>
       <td><%= drawing.created_at %></td>
-      <td><%= link_to 'Show', drawing_path(drawing) %></td>
-      <td><%= link_to 'Destroy', drawing_path(drawing),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Buy', drawing_path(drawing) %></td>
     </tr>
   <% end %>
   </tbody>

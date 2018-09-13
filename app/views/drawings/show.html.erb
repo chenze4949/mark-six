@@ -1,48 +1,86 @@
-<p>
-<strong>Title:</strong>
+<h2>
 <%= @drawing.title %>
-</p>
+</h2>
 
 <p>
 <strong>Created At:</strong>
 <%= @drawing.created_at %>
 </p>
 
-<h2>Tickets</h2>
-<% @drawing.tickets.each do |ticket| %>
-  <p>
-    <strong>Id:</strong>
-    <%= ticket.id %>
-  </p>
-
-  <p>
-    <strong>Drawing:</strong>
-    <%= ticket.drawing_id %>
-  </p>
+<h4>Your Tickets</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Drawing</th>
+      <th>User</th>
+      <th>Numbers</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @drawing.tickets.each do |ticket| %>
+    <tr>
+      <td><%= ticket.drawing_id %></td>
+      <td><%= ticket.user_id %></td>
+      <td>
+        <% ticket.picks.each do |pick| %>
+          <%= pick.ball_number %>
+        <% end %>
+      </td>
+      <td><%= ticket.created_at %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
  
-  <p>
-    <strong>User:</strong>
-    <%= ticket.user_id %>
-  </p>
-<% end %>
- 
-<h2>Buy a ticket:</h2>
-<%= form_with(model: [ @drawing, @drawing.tickets.build ], local: true) do |form| %>
+<h4>Buy a ticket:</h4>
+<%= form_with(model: [ @drawing, @drawing.tickets.build ], local: true, id: "picks") do |form| %>
   <p>
     <%= form.label :picks %><br>
-    <p>Please pick 3 numbers!</p>
-    <ul>
-      <% 1.upto(10) do |i| -%>
-          <li>
-            <%= check_box_tag "picks[]", i %>
-            <%= i -%>
-          </li>
-      <% end %>
-    </ul>
+    <p>Please pick 6 numbers!</p>
+    <% 1.upto(10) do |i| -%>
+      <label class="checkbox-inline">
+        <input name="ball_numbers[]" value="<%= i %>"  type= "checkbox"/>
+        <%= i -%>
+      </label>
+    <% end %>
   </p>
   <p>
-    <%= form.submit %>
+    <%= form.submit "Buy" %>
   </p>
 <% end %>
 
 <%= link_to 'Back', drawings_path %>
+
+<script type="text/javascript">
+
+  function checkboxlimit(checkgroup, limit){
+    var checkgroup = checkgroup
+    var limit = limit
+    for (var i = 0; i < checkgroup.length; i++){
+      checkgroup[i].onclick = function(){
+      var checkedcount = 0
+      for (var i = 0; i < checkgroup.length; i++)
+        checkedcount += (checkgroup[i].checked) ? 1 : 0
+      if (checkedcount > limit){
+        alert("You can only select a maximum of "+limit+" ball numbers")
+        this.checked = false
+        }
+      }
+    }
+  }
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    checkboxlimit(document.forms.picks.elements['ball_numbers[]'], 6);
+
+    $("form").submit(function(){
+		if ($('input:checkbox').filter(':checked').length < 1){
+        alert("Please pick 6 numbers!");
+		return false;
+		}
+    });
+  });
+</script>
