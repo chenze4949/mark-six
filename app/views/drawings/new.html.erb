@@ -1,0 +1,32 @@
+<%= form_with scope: :drawing, url: drawings_path, local: true do |form| %>
+ 
+  <% if @drawing.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@drawing.errors.count, "error") %> prohibited
+        this drawing from being saved:
+      </h2>
+      <ul>
+        <% @drawing.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :drawing_type %><br>
+    <%= form.text_field :drawing_type %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
+ 
+<%= link_to 'Back', drawings_path %>
