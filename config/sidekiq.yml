@@ -2,5 +2,5 @@
 
 :schedule:
   drawing:
-    cron: '0 */5 * * * *'   # Runs once per minute
+    cron: '0 */5 * * * *'
     class: Drawing

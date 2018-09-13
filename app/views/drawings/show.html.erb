@@ -6,13 +6,12 @@
 <strong>Created At:</strong>
 <%= @drawing.created_at %>
 </p>
-
-<h4>Your Tickets</h4>
+<hr/>
+<h4>Your Ticket Records:</h4>
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Drawing</th>
-      <th>User</th>
       <th>Numbers</th>
       <th>Created At</th>
     </tr>
@@ -21,7 +20,6 @@
   <% @drawing.tickets.each do |ticket| %>
     <tr>
       <td><%= ticket.drawing_id %></td>
-      <td><%= ticket.user_id %></td>
       <td>
         <% ticket.picks.each do |pick| %>
           <%= pick.ball_number %>
@@ -32,11 +30,10 @@
   <% end %>
   </tbody>
 </table>
- 
+<hr/>
 <h4>Buy a ticket:</h4>
 <%= form_with(model: [ @drawing, @drawing.tickets.build ], local: true, id: "picks") do |form| %>
   <p>
-    <%= form.label :picks %><br>
     <p>Please pick 6 numbers!</p>
     <% 1.upto(10) do |i| -%>
       <label class="checkbox-inline">
@@ -49,8 +46,6 @@
     <%= form.submit "Buy" %>
   </p>
 <% end %>
-
-<%= link_to 'Back', drawings_path %>
 
 <script type="text/javascript">
 
