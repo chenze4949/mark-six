@@ -1,0 +1,6 @@
+# config/sidekiq.yml
+
+:schedule:
+  drawing_worker:
+    cron: '0 * * * * *'   # Runs once per minute
+    class: DrawingWorker

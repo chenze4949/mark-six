@@ -1,3 +1,5 @@
+require 'sidekiq-scheduler'
+
 class DrawingWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
