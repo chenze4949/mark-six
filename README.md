@@ -1,24 +1,34 @@
-# README
+# Mark Six
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A lotto Rails app, which can easily be deployed to Heroku.
 
-Things you may want to cover:
+### Installation
 
-* Ruby version
+Lotto requires `ruby 2.5.1`, `rails 5.2.0`, `redis` and `postgresql` to run.
 
-* System dependencies
+For development environments, install the dependencies and devDependencies and start the server.
 
-* Configuration
+```sh
+$ brew services start postgresql
+$ brew services start redis
+$ bundle
+$ rails db:migrate
+$ rails server
+$ bundle exec sidekiq
+```
 
-* Database creation
+Your app should now be running on [localhost:3000](http://localhost:3000/).
 
-* Database initialization
+or
 
-* How to run the test suite
+You can change `rails server` to `heroku local web`. Your app should now be running on [localhost:5000](http://localhost:5000/).
 
-* Services (job queues, cache servers, search engines, etc.)
+## Deploying to Heroku
 
-* Deployment instructions
-
-* ...
+```sh
+$ brew install heroku
+$ heroku create
+$ git push heroku master
+$ heroku run rake db:migrate
+$ heroku open
+```

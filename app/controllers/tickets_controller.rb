@@ -5,7 +5,7 @@ class TicketsController < ApplicationController
     @drawing = Drawing.find(params[:drawing_id])
     if params[:ball_numbers].kind_of?(Array)
       ticket = Ticket.create(drawing_id: @drawing.id, user_id: current_user.id)
-      for ball_number in params[:ball_numbers]
+      for ball_number in params[:ball_numbers].sort
         Pick.create(ticket_id: ticket.id, ball_number: ball_number)
       end
     end

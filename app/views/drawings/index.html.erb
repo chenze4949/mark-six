@@ -4,9 +4,10 @@
     <tr>
       <th>Id</th>
       <th>Title</th>
-      <th>Type</th>
       <th>Created At</th>
-      <th colspan="1"></th>
+      <th>Winning Numbers</th>
+      <th>Status</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
   <tbody>
@@ -14,9 +15,21 @@
     <tr>
       <td><%= drawing.id %></td>
       <td><%= drawing.title %></td>
-      <td><%= drawing.drawing_type %></td>
       <td><%= drawing.created_at %></td>
-      <td><%= link_to 'Buy', drawing_path(drawing) %></td>
+      <td>
+        <% drawing.winning_picks.each do |winning_pick| %>
+          <%= winning_pick.ball_number %>
+        <% end %>
+      </td>
+      <td><%= drawing.drawing_on ? 'Finished' : 'Available' %></td>
+      <td><%= link_to 'Destroy', drawing_path(drawing),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <% if drawing.drawing_on %>
+        <td><%= link_to 'Show', drawing_path(drawing) %></td>
+      <% else %>
+        <td><%= link_to 'Buy', drawing_path(drawing) %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

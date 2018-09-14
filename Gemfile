@@ -33,8 +33,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rails_admin', '~> 1.3'
 gem 'sidekiq'
-gem 'sidekiq-scheduler', '~> 1'
+gem 'whenever', :require => false
 
 gem 'devise'
 

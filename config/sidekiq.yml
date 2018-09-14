@@ -1,6 +1,0 @@
-# config/sidekiq.yml
-
-:schedule:
-  drawing:
-    cron: '0 */5 * * * *'
-    class: Drawing

@@ -1,6 +1,6 @@
 class DrawingsController < ApplicationController
   def index
-    @drawings = Drawing.all
+    @drawings = Drawing.order(id: :desc)
   end
  
   def show
@@ -16,6 +16,8 @@ class DrawingsController < ApplicationController
 
     if @drawing.save
       redirect_to @drawing
+      DrawingWorker.perform_in(1.minutes)
+      DrawingOpenWorker.perform_in(1.minutes, @drawing.id)
     else
       render 'new'
     end

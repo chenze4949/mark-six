@@ -7,6 +7,28 @@
 <%= @drawing.created_at %>
 </p>
 <hr/>
+<h4>Final Winning Picks: </h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Drawing On</th>
+      <th>Numbers</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @drawing.drawing_on %></td>
+      <td>
+        <% @drawing.winning_picks.each do |winning_pick| %>
+          <%= winning_pick.ball_number %>
+        <% end %>
+      </td>
+      <td><%= @drawing.drawing_on ? 'Finished' : 'Available' %></td>
+    </tr>
+  </tbody>
+</table>
+<hr/>
 <h4>Your Ticket Records:</h4>
 <table class="table table-striped">
   <thead>
@@ -17,7 +39,7 @@
     </tr>
   </thead>
   <tbody>
-  <% @drawing.tickets.each do |ticket| %>
+  <% @drawing.current_tickets.each do |ticket| %>
     <tr>
       <td><%= ticket.drawing_id %></td>
       <td>
@@ -31,20 +53,22 @@
   </tbody>
 </table>
 <hr/>
-<h4>Buy a ticket:</h4>
-<%= form_with(model: [ @drawing, @drawing.tickets.build ], local: true, id: "picks") do |form| %>
-  <p>
-    <p>Please pick 6 numbers!</p>
-    <% 1.upto(10) do |i| -%>
-      <label class="checkbox-inline">
-        <input name="ball_numbers[]" value="<%= i %>"  type= "checkbox"/>
-        <%= i -%>
-      </label>
-    <% end %>
-  </p>
-  <p>
-    <%= form.submit "Buy" %>
-  </p>
+<% if not @drawing.drawing_on %>
+  <h4>Buy a ticket:</h4>
+  <%= form_with(model: [ @drawing, @drawing.tickets.build ], local: true, id: "picks") do |form| %>
+    <p>
+      <p>Please pick 6 numbers!</p>
+      <% 1.upto(10) do |i| -%>
+        <label class="checkbox-inline">
+          <input name="ball_numbers[]" value="<%= i %>"  type= "checkbox"/>
+          <%= i -%>
+        </label>
+      <% end %>
+    </p>
+    <p>
+      <%= form.submit "Buy" %>
+    </p>
+  <% end %>
 <% end %>
 
 <script type="text/javascript">
