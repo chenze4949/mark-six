@@ -1,10 +1,10 @@
-<h1>Listing drawings</h1>  
+<h1>Latest Mark Six Drawings</h1>  
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Id</th>
       <th>Title</th>
-      <th>Created At</th>
+      <th>Date</th>
       <th>Winning Numbers</th>
       <th>Status</th>
       <th colspan="2"></th>
@@ -17,8 +17,8 @@
       <td><%= drawing.title %></td>
       <td><%= drawing.created_at %></td>
       <td>
-        <% drawing.winning_picks.each do |winning_pick| %>
-          <%= winning_pick.ball_number %>
+        <% drawing.winning_numbers.each do |numbers| %>
+          <%= numbers %>
         <% end %>
       </td>
       <td><%= drawing.drawing_on ? 'Finished' : 'Available' %></td>

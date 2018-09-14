@@ -1,10 +1,14 @@
 <h2>
 <%= @drawing.title %>
 </h2>
-
 <p>
-<strong>Created At:</strong>
-<%= @drawing.created_at %>
+<% if @drawing.drawing_on%>
+  <% if @is_winner %>
+    <h4>Congratulation! You are the winner! </h4>
+  <% else %>
+    <h4>What a pity! Add oid next time! </h4>
+  <% end %>
+<% end %>
 </p>
 <hr/>
 <h4>Final Winning Picks: </h4>
@@ -35,20 +39,22 @@
     <tr>
       <th>Drawing</th>
       <th>Numbers</th>
-      <th>Created At</th>
+      <th>Date</th>
     </tr>
   </thead>
   <tbody>
-  <% @drawing.current_tickets.each do |ticket| %>
-    <tr>
-      <td><%= ticket.drawing_id %></td>
-      <td>
-        <% ticket.picks.each do |pick| %>
-          <%= pick.ball_number %>
-        <% end %>
-      </td>
-      <td><%= ticket.created_at %></td>
-    </tr>
+  <% if @user_tickets %>
+    <% @user_tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.drawing_id %></td>
+        <td>
+          <% ticket.ticket_numbers.each do |number| %>
+            <%= number %>
+          <% end %>
+        </td>
+        <td><%= ticket.created_at %></td>
+      </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>
