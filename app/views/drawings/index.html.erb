@@ -17,7 +17,7 @@
       <td><%= drawing.title %></td>
       <td><%= drawing.created_at %></td>
       <td>
-        <% drawing.winning_numbers.each do |numbers| %>
+        <% drawing.winning_numbers.sort.each do |numbers| %>
           <%= numbers %>
         <% end %>
       </td>

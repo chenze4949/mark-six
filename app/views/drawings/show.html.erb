@@ -48,7 +48,7 @@
       <tr>
         <td><%= ticket.drawing_id %></td>
         <td>
-          <% ticket.ticket_numbers.each do |number| %>
+          <% ticket.ticket_numbers.sort.each do |number| %>
             <%= number %>
           <% end %>
         </td>

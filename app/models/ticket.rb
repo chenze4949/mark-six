@@ -6,6 +6,6 @@ class Ticket < ApplicationRecord
     self.picks.each do |pick|
       numbers.push(pick.ball_number)
     end
-    return numbers.sort
+    return numbers
   end
 end

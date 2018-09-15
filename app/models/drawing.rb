@@ -7,6 +7,6 @@ class Drawing < ApplicationRecord
     self.winning_picks.each do |pick|
       numbers.push(pick.ball_number)
     end
-    return numbers.sort
+    return numbers
   end
 end
