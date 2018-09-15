@@ -1,6 +1,6 @@
 # Mark Six
 
-A lotto Rails app, which can easily be deployed to Heroku.
+A Mark Six Rails app, which can easily be deployed to Heroku.
 
 # Getting started
 
