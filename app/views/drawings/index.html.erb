@@ -22,9 +22,6 @@
         <% end %>
       </td>
       <td><%= drawing.drawing_on ? 'Finished' : 'Available' %></td>
-      <td><%= link_to 'Destroy', drawing_path(drawing),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
       <% if drawing.drawing_on %>
         <td><%= link_to 'Show', drawing_path(drawing) %></td>
       <% else %>
